@@ -1,14 +1,25 @@
 # parametres.py
 
-# Poids des critères dans l'ordre : [Coût, Classement, Distance, Climat, Vie Etudiante]
-# Total = 10
-POIDS = [3.0, 2.5, 1.5, 1.0, 2.0]
+# Poids des critères associés aux colonnes exactes du CSV
+POIDS = {
+    'Cout': 3.0, 
+    'Classement_QS': 2.5, 
+    'Distance': 1.5, 
+    'Climat': 1.0, 
+    'Vie_Etudiante': 2.0
+}
 
 # Objectifs : True si le critère doit être minimisé, False s'il doit être maximisé
-A_MINIMISER = [True, True, True, False, False]
+A_MINIMISER = {
+    'Cout': True, 
+    'Classement_QS': True, 
+    'Distance': True, 
+    'Climat': False, 
+    'Vie_Etudiante': False
+}
 
-# Seuils pour la méthode de surclassement (Electre)
+# Seuils pour la méthode de surclassement (Electre - Membre 2)
 # 0 signifie qu'aucun seuil n'est défini pour ce critère
-SEUILS_INDIFF_Q = [50, 10, 0, 0, 0]
-SEUILS_PREF_P = [150, 30, 0, 0, 0]
-SEUILS_VETO_V = [1600, 0, 8000, 0, 0]
+SEUILS_INDIFF_Q = {'Cout': 50, 'Classement_QS': 10, 'Distance': 0, 'Climat': 0, 'Vie_Etudiante': 0}
+SEUILS_PREF_P = {'Cout': 150, 'Classement_QS': 30, 'Distance': 0, 'Climat': 0, 'Vie_Etudiante': 0}
+SEUILS_VETO_V = {'Cout': 1600, 'Classement_QS': 0, 'Distance': 8000, 'Climat': 0, 'Vie_Etudiante': 0}
