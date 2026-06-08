@@ -1,7 +1,8 @@
-Alternative,Coût de la vie mensuel (€) ↓,Prestige (Score sur 100) ↑,Climat (1 à 5) ↑,Distance depuis Paris (km) ↓,Qualité de vie étudiante (1 à 5) ↑
-Montréal (Canada),1200,82,2,5500,5
-Tokyo (Japon),1100,88,3,9700,4
-Londres (Royaume-Uni),1850,95,2,340,4
-Prague (Tchéquie),800,72,2,880,4
-Barcelone (Espagne),1000,76,5,830,5
-Singapour (Singapour),1600,92,3,10700,4
+Alternative,Coût de la vie mensuel (€) ↓,Classement_QS ↓,Distance depuis Paris (km) ↓,Climat (1 à 5) ↑,Qualité de vie étudiante (1 à 5) ↑
+Montréal,1250,30,5500,2,5
+Tokyo,1100,28,9700,4,4.5
+Londres,1900,9,340,3,5
+Prague,800,248,850,3,4
+Barcelone,1050,164,830,5,4.5
+Munich,1400,37,680,3,4
+Milan,1200,123,640,4,4
