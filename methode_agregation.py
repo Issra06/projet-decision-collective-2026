@@ -35,6 +35,10 @@ def calculer_somme_ponderee(df, params):
         df_res["Score_Global"] += df_res[f"Norm_{critere}"] * poids[critere]
         
     df_res["Score_Global"] = df_res["Score_Global"] / somme_poids
+
+    print("\n--- MATRICE NORMALISÉE (Étape intermédiaire) ---")
+    colonnes_norm = ["Alternative"] + [col for col in df_res.columns if col.startswith("Norm_")]
+    print(df_res[colonnes_norm].round(3))
     
     # 3. Tri pour afficher le classement
     df_res = df_res.sort_values(by="Score_Global", ascending=False).reset_index(drop=True)
