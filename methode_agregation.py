@@ -40,7 +40,8 @@ def calculer_somme_ponderee(df, params):
     colonnes_norm = ["Alternative"] + [col for col in df_res.columns if col.startswith("Norm_")]
     print(df_res[colonnes_norm].round(3))
     
-    # 3. Tri pour afficher le classement
+   # 3. Tri pour afficher le classement du meilleur au moins bon
     df_res = df_res.sort_values(by="Score_Global", ascending=False).reset_index(drop=True)
+    df_res.index = df_res.index + 1  
     
     return df_res
