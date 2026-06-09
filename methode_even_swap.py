@@ -1,4 +1,3 @@
-# methode_evenswap_automatique.py
 import pandas as pd
 from data_loader import charger_donnees, obtenir_parametres
 
@@ -36,7 +35,7 @@ def evenswap_automatique(df, params):
     
     critere_ref = 'Coût de la vie mensuel (€) ↓'
     
-    # Calcul des amplitudes (Range) initiales pour établir les taux de change
+    
     amplitudes = {c: df[c].max() - df[c].min() for c in poids.keys()}
     
     df_courant = df.copy()
@@ -44,12 +43,10 @@ def evenswap_automatique(df, params):
     
     for c in criteres_actifs:
         df_courant[c] = df_courant[c].astype(float)
-    # ----------------------
     
     print("=== ÉTAT INITIAL ===")
     print(df_courant.to_string(index=False))
     
-    # On trie les critères à neutraliser, du moins lourd au plus lourd
     criteres_a_neutraliser = sorted(
         [c for c in criteres_actifs if c != critere_ref], 
         key=lambda x: poids[x]
@@ -57,37 +54,31 @@ def evenswap_automatique(df, params):
     
     for c in criteres_a_neutraliser:
         if len(df_courant) <= 1:
-            break # Il ne reste qu'une ville gagnante
+            break 
             
         print(f"\n\n>>> NEUTRALISATION DU CRITÈRE : {c} <<<")
         
-        # On repère la pire valeur du tableau pour ce critère
         pire_val = df_courant[c].max() if a_min[c] else df_courant[c].min()
         print(f"Alignement de toutes les villes sur la pire valeur : {pire_val}")
         
         for idx, row in df_courant.iterrows():
             val_actuelle = row[c]
-            
-            # Calcul de la dégradation subie par la ville
+        
             perte = (pire_val - val_actuelle) if a_min[c] else (val_actuelle - pire_val)
             
             if perte > 0:
-                # --- LE CŒUR MATHÉMATIQUE DE L'EVEN SWAP ---
-                # Conversion de la perte en "euros" (critère de référence) selon les poids croisés
                 ratio_echelle = amplitudes[critere_ref] / amplitudes[c] if amplitudes[c] != 0 else 0
                 ratio_poids = poids[c] / poids[critere_ref]
                 compensation = perte * ratio_echelle * ratio_poids
                 
-                # On récompense la ville sur le coût de la vie puisqu'on a dégradé son critère 'c'
                 if a_min[critere_ref]:
-                    df_courant.loc[idx, critere_ref] -= compensation # On baisse son coût (bonus)
+                    df_courant.loc[idx, critere_ref] -= compensation 
                 else:
                     df_courant.loc[idx, critere_ref] += compensation
                 
-            # La ville est maintenant alignée sur la pire valeur
+            
             df_courant.loc[idx, c] = pire_val
             
-        # Suppression du critère neutralisé
         df_courant = df_courant.drop(columns=[c])
         criteres_actifs.remove(c)
         df_courant[critere_ref] = df_courant[critere_ref].round(1)
@@ -95,7 +86,6 @@ def evenswap_automatique(df, params):
         print("\nMatrice après compensation :")
         print(df_courant.to_string(index=False))
         
-        # Filtrage de Pareto sur le nouvel espace réduit
         df_courant = purger_domines(df_courant, a_min, criteres_actifs)
         
     print("\n\n=== RÉSULTAT FINAL EVEN SWAP ===")
