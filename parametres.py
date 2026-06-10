@@ -37,7 +37,7 @@ SEUILS_PREF_P = {
 }
 
 SEUILS_VETO_V = {
-    'Coût de la vie mensuel (€) ↓': 1600, 
+    'Coût de la vie mensuel (€) ↓': 600, 
     'Classement_QS ↓': 0, 
     'Distance depuis Paris (km) ↓': 8000, 
     'Climat (1 à 5) ↑': 0, 
